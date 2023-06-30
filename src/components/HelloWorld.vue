@@ -185,23 +185,25 @@ RouterA:
           },
           {
             id: 'node2',
-            img: require('../assets/router.png'),
+            img: require('../assets/pc.png'),
             x: 300,
             y: 300,
-            label: 'RouterB',
+            label: 'PC-2',
           },
           {
             id: 'node3',
-            img: require('../assets/switch.png'),
+            img: require('../assets/pc.png'),
             x: 60,
             y: 300,
-            label: 'SwitchA',
+            label: 'PC-1',
           },
         ],
         edges: [
           {
             source: 'node1',
             target: 'node2',
+              type: 'line'
+
             // label: 'edge 1',
           },
           // {
