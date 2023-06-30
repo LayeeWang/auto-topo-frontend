@@ -16,10 +16,10 @@
               <el-input v-model="form.des" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="截止日期" :label-width="formLabelWidth">
-<!--              <el-select v-model="form.date" placeholder="请选择当前状态">-->
-<!--                <el-option label="UP" value="up"></el-option>-->
-<!--                <el-option label="DOWN" value="down"></el-option>-->
-<!--              </el-select>-->
+              <!--              <el-select v-model="form.date" placeholder="请选择当前状态">-->
+              <!--                <el-option label="UP" value="up"></el-option>-->
+              <!--                <el-option label="DOWN" value="down"></el-option>-->
+              <!--              </el-select>-->
               <el-date-picker
                   v-model="form.date"
                   type="date"
@@ -96,90 +96,143 @@ export default {
         date: '',
       },
       taskData: [
+        {
+          taskName: '拓扑结构初始化',
+          score: [
             {
-              taskName: 'Task1',
-              score: [
-                {
-                  id: '181250111',
-                  name: '潘越',
-                  score: '59'
-                },
-                {
-                  id: '123456',
-                  name: '王馨逸',
-                  score: '100'
-                },
-                {
-                  id: '100',
-                  name: '张三',
-                  score: '89'
-                },
-                {
-                  id: '5567897',
-                  name: '张四',
-                  score: '79'
-                },
-                {
-                  id: '563432432',
-                  name: '张五',
-                  score: '94'
-                },
-                {
-                  id: '98765432',
-                  name: '张六',
-                  score: '66'
-                },
-                {
-                  id: '100',
-                  name: '张三三',
-                  score: '90'
-                },
-                {
-                  id: '5567897',
-                  name: '张四四',
-                  score: '77'
-                },
-                {
-                  id: '563432432',
-                  name: '张五五',
-                  score: '84'
-                },
-                {
-                  id: '98765432',
-                  name: '张六六',
-                  score: '56'
-                },
-
-              ],
+              id: '181250111',
+              name: '潘越',
+              score: '59'
             },
             {
-              taskName: 'Task2',
-              score: [
-                {
-                  id: '100',
-                  name: '张三',
-                  score: '89'
-                },
-                {
-                  id: '5567897',
-                  name: '张四',
-                  score: '79'
-                },
-                {
-                  id: '563432432',
-                  name: '张五',
-                  score: '94'
-                },
-                {
-                  id: '98765432',
-                  name: '张六',
-                  score: '66'
-                },
+              id: '123456',
+              name: '王馨逸',
+              score: '100'
+            },
+            {
+              id: '100',
+              name: '张三',
+              score: '89'
+            },
+            {
+              id: '5567897',
+              name: '张四',
+              score: '79'
+            },
+            {
+              id: '563432432',
+              name: '张五',
+              score: '94'
+            },
+            {
+              id: '98765432',
+              name: '张六',
+              score: '66'
+            },
+            {
+              id: '100',
+              name: '张三三',
+              score: '90'
+            },
+            {
+              id: '5567897',
+              name: '张四四',
+              score: '77'
+            },
+            {
+              id: '563432432',
+              name: '张五五',
+              score: '84'
+            },
+            {
+              id: '98765432',
+              name: '张六六',
+              score: '56'
+            },
 
-              ],
-            }
-            ],
-      tableData:  [
+          ],
+        },
+        {
+          taskName: '路由器参数配置',
+          score: [
+            {
+              id: '100',
+              name: '张三',
+              score: '89'
+            },
+            {
+              id: '5567897',
+              name: '张四',
+              score: '79'
+            },
+            {
+              id: '563432432',
+              name: '张五',
+              score: '94'
+            },
+            {
+              id: '98765432',
+              name: '张六',
+              score: '66'
+            },
+
+          ],
+        },
+        {
+          taskName: '子网划分',
+          score: [
+            {
+              id: '100',
+              name: '张三',
+              score: '70'
+            },
+            {
+              id: '5567897',
+              name: '张四',
+              score: '60'
+            },
+            {
+              id: '563432432',
+              name: '张五',
+              score: '99'
+            },
+            {
+              id: '98765432',
+              name: '张六',
+              score: '90'
+            },
+
+          ],
+        },
+        {
+          taskName: 'NAT练习',
+          score: [
+            {
+              id: '100',
+              name: '张三',
+              score: '90'
+            },
+            {
+              id: '5567897',
+              name: '张四',
+              score: '67'
+            },
+            {
+              id: '563432432',
+              name: '张五',
+              score: '92'
+            },
+            {
+              id: '98765432',
+              name: '张六',
+              score: '88'
+            },
+
+          ],
+        }
+
+      ],
+      tableData: [
         {
           id: '181250111',
           name: '潘越',
@@ -233,7 +286,7 @@ export default {
 
       ],
       launchTaskVisible: false,
-      currentTask: ["拓扑结构初始化", "路由器参数配置","子网划分","NAT练习"],
+      currentTask: ["拓扑结构初始化", "路由器参数配置", "子网划分", "NAT练习"],
       value: '拓扑结构初始化'
     }
   },
@@ -242,12 +295,12 @@ export default {
     // this.tableData = this.taskData[0].score;
   },
   methods: {
-    setTableData(item){
+    setTableData(item) {
       console.log(item)
       console.log(this.taskData)
       // console.log(index)
-      for(let i of this.taskData){
-        if(i.taskName === item){
+      for (let i of this.taskData) {
+        if (i.taskName === item) {
           this.tableData = i.score
         }
       }
@@ -296,9 +349,9 @@ export default {
     handleLaunchTask() {
       this.launchTaskVisible = true;
     },
-    onConfirmForm(){
+    onConfirmForm() {
       this.currentTask.push(this.form.taskName)
-      this.taskData.push({taskName: this.form.taskName,score: []})
+      this.taskData.push({taskName: this.form.taskName, score: []})
       this.launchTaskVisible = false;
     }
   }
