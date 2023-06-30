@@ -1,6 +1,6 @@
 <template>
   <el-container id="container" style="height: calc(100vh - 70px);margin-top:70px">
-    <el-aside width="50%" style="background-color: #eeeeee">
+    <el-aside width="50vw" style="background-color: #eeeeee">
       <div id="g6Data">
 
       </div>
@@ -55,6 +55,26 @@
                     size="mini"
                     @click="handleEdit(scope.$index, scope.row)">配置
                 </el-button>
+                <el-dialog title="Router配置" :visible.sync="dialogFormVisible">
+                  <el-form :model="form">
+                    <el-form-item label="PORT" :label-width="formLabelWidth">
+                      <el-input v-model="form.port" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="IP" :label-width="formLabelWidth">
+                        <el-input v-model="form.ip" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="STATUS" :label-width="formLabelWidth">
+                      <el-select v-model="form.status" placeholder="请选择当前状态">
+                        <el-option label="UP" value="up"></el-option>
+                        <el-option label="DOWN" value="down"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-form>
+                  <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="onConfirmForm">确 定</el-button>
+                  </div>
+                </el-dialog>
               </template>
             </el-table-column>
           </el-table>
@@ -131,6 +151,13 @@ RouterA:
       ],
       command: '',
       executeResult: '',
+      dialogFormVisible: false,
+      formLabelWidth: '80px',
+      form: {
+        status: false,
+        ip: '',
+        port: '',
+      },
     }
   },
   mounted() {
@@ -154,23 +181,23 @@ RouterA:
           {
             id: 'node1',
             img: require('../assets/router.png'),
-            x: 150,
-            y: 50,
-            label: 'Router_1',
+            x: 50,
+            y: 20,
+            label: 'RouterA',
           },
           {
             id: 'node2',
             img: require('../assets/router.png'),
             x: 300,
             y: 300,
-            label: 'Router_2',
+            label: 'RouterB',
           },
           {
             id: 'node3',
             img: require('../assets/switch.png'),
             x: 60,
             y: 300,
-            label: 'Switch_1',
+            label: 'SwitchA',
           },
         ],
         edges: [
@@ -179,12 +206,12 @@ RouterA:
             target: 'node2',
             // label: 'edge 1',
           },
-          {
-            source: 'node2',
-            target: 'node3',
-            type: 'line'
-            // label: 'edge 2',
-          },
+          // {
+          //   source: 'node2',
+          //   target: 'node3',
+          //   type: 'line'
+          //   // label: 'edge 2',
+          // },
           {
             source: 'node3',
             target: 'node1',
@@ -193,8 +220,8 @@ RouterA:
           },
         ],
       };
-      const width = document.getElementById('g6Data').scrollWidth;
-      const height = document.getElementById('g6Data').scrollHeight || 500;
+      const width = document.getElementById('g6Data').clientWidth;
+      const height = document.getElementById('g6Data').scrollHeight || 800;
       G6.registerEdge(
           'circle-running',
           {
@@ -289,8 +316,13 @@ RouterA:
       alert('clear success')
     },
     handleEdit(index, row) {
-
+      this.form = row;
+      this.dialogFormVisible = true;
     },
+    onConfirmForm(index, row){
+      this.routerData[index] = row;
+      this.dialogFormVisible = false;
+    }
   }
 }
 </script>

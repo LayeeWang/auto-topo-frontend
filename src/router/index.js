@@ -9,10 +9,10 @@ Vue.use(Router)
 
 export default new Router({
     routes: [
-        // {
-        //     path: '/',
-        //     redirect: '/login',
-        // },
+        {
+            path: '/',
+            redirect: '/login',
+        },
         {
             path: '/login',
             component: () => import('@/components/login'),
@@ -20,8 +20,8 @@ export default new Router({
             hidden: true
         },
         {
-            path: '/',
-            redirect: '/dashboard',
+            path: '/dashboard',
+            // redirect: '/dashboard',
             component: layout,
             children: [
                 {

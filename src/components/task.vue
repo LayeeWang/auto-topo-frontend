@@ -3,11 +3,49 @@
     <el-aside style="width: 50%;display: inline-block;"
               width="50%"
     >
+      <div style="text-align: left;padding-left: 2em;margin-bottom: 1em">
+        <el-button type="primary" @click="handleLaunchTask" style="margin-right: 3em"
+        >发布任务
+        </el-button>
+        <el-dialog title="发布任务" :visible.sync="launchTaskVisible">
+          <el-form :model="form">
+            <el-form-item label="任务名称" :label-width="formLabelWidth">
+              <el-input v-model="form.taskName" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="任务描述" :label-width="formLabelWidth">
+              <el-input v-model="form.des" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="截止日期" :label-width="formLabelWidth">
+<!--              <el-select v-model="form.date" placeholder="请选择当前状态">-->
+<!--                <el-option label="UP" value="up"></el-option>-->
+<!--                <el-option label="DOWN" value="down"></el-option>-->
+<!--              </el-select>-->
+              <el-date-picker
+                  v-model="form.date"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="launchTaskVisible = false">取 消</el-button>
+            <el-button type="primary" @click="onConfirmForm">确 定</el-button>
+          </div>
+        </el-dialog>
+
+        <el-select v-model="value" placeholder="请选择当前任务" @change="setTableData">
+          <el-option v-for="(item,index) in currentTask" :label="item" :value="item"
+
+          ></el-option>
+
+        </el-select>
+      </div>
       <el-table
           :header-cell-style="{'text-align':'center'}"
           :cell-style="{'text-align':'center'}"
-          :data="taskData"
-          style="margin-top: 3em;">
+          :data="tableData"
+      >
         <el-table-column
             prop="id"
             label="学号">
@@ -51,7 +89,98 @@ export default {
   name: "task",
   data() {
     return {
-      taskData: [
+      formLabelWidth: '80px',
+      form: {
+        taskName: '',
+        des: '',
+        date: '',
+      },
+      taskData:
+          [
+            {
+              taskName: 'Task1',
+              score: [
+                {
+                  id: '181250111',
+                  name: '潘越',
+                  score: '59'
+                },
+                {
+                  id: '123456',
+                  name: '王馨逸',
+                  score: '100'
+                },
+                {
+                  id: '100',
+                  name: '张三',
+                  score: '89'
+                },
+                {
+                  id: '5567897',
+                  name: '张四',
+                  score: '79'
+                },
+                {
+                  id: '563432432',
+                  name: '张五',
+                  score: '94'
+                },
+                {
+                  id: '98765432',
+                  name: '张六',
+                  score: '66'
+                },
+                {
+                  id: '100',
+                  name: '张三三',
+                  score: '90'
+                },
+                {
+                  id: '5567897',
+                  name: '张四四',
+                  score: '77'
+                },
+                {
+                  id: '563432432',
+                  name: '张五五',
+                  score: '84'
+                },
+                {
+                  id: '98765432',
+                  name: '张六六',
+                  score: '56'
+                },
+
+              ],
+            },
+            {
+              taskName: 'Task2',
+              score: [
+                {
+                  id: '100',
+                  name: '张三',
+                  score: '89'
+                },
+                {
+                  id: '5567897',
+                  name: '张四',
+                  score: '79'
+                },
+                {
+                  id: '563432432',
+                  name: '张五',
+                  score: '94'
+                },
+                {
+                  id: '98765432',
+                  name: '张六',
+                  score: '66'
+                },
+
+              ],
+            }
+            ],
+      tableData:  [
         {
           id: '181250111',
           name: '潘越',
@@ -104,16 +233,32 @@ export default {
         },
 
       ],
-
+      launchTaskVisible: false,
+      currentTask: ["Task1", "Task2"],
+      value: 'Task1'
     }
   },
   mounted() {
     this.handleEcharts()
+    // this.tableData = this.taskData[0].score;
   },
   methods: {
+    setTableData(item){
+      console.log(item)
+      console.log(this.taskData)
+      // console.log(index)
+      for(let i of this.taskData){
+        if(i.taskName === item){
+          this.tableData = i.score
+        }
+      }
+      console.log(this.tableData)
+      this.handleEcharts()
+      // this.tableData = this.taskData[index].score;
+    },
     dataProcess() {
       let box = [0, 0, 0, 0, 0]
-      for (let i of this.taskData) {
+      for (let i of this.tableData) {
         let s = i.score;
         if (s < 60) box[0]++;
         else if (s < 70) box[1]++;
@@ -127,8 +272,6 @@ export default {
       let chartDom = document.getElementById('e');
       let myChart = echarts.init(chartDom);
       let option;
-
-
       option = {
         xAxis: {
           type: 'category',
@@ -148,8 +291,16 @@ export default {
       option && myChart.setOption(option);
     },
     handleDel(idx, row) {
-      this.taskData.splice(idx, 1);
+      this.tableData.splice(idx, 1);
       this.handleEcharts();
+    },
+    handleLaunchTask() {
+      this.launchTaskVisible = true;
+    },
+    onConfirmForm(){
+      this.currentTask.push(this.form.taskName)
+      this.taskData.push({taskName: this.form.taskName,score: []})
+      this.launchTaskVisible = false;
     }
   }
 }
