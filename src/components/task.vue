@@ -95,8 +95,7 @@ export default {
         des: '',
         date: '',
       },
-      taskData:
-          [
+      taskData: [
             {
               taskName: 'Task1',
               score: [
@@ -234,8 +233,8 @@ export default {
 
       ],
       launchTaskVisible: false,
-      currentTask: ["Task1", "Task2"],
-      value: 'Task1'
+      currentTask: ["拓扑结构初始化", "路由器参数配置","子网划分","NAT练习"],
+      value: '拓扑结构初始化'
     }
   },
   mounted() {

@@ -16,9 +16,13 @@
           <!--          <a-icon type="desktop"/>-->
           <span>主页</span>
         </el-menu-item>
-        <el-menu-item class="menu-top-item" index="/task" v-if="userType==='admin'">
+        <el-menu-item class="menu-top-item" index="/task" v-if="userType === 'admin'">
           <!--          <a-icon type="search" />-->
           <span>任务管理</span>
+        </el-menu-item>
+        <el-menu-item class="menu-top-item" index="/myTask" v-if="userType !== 'admin'">
+          <!--          <a-icon type="search" />-->
+          <span>我的任务</span>
         </el-menu-item>
         <el-menu-item class="menu-top-item" index="/login">
           <!--          <a-icon type="car"/>-->

@@ -1,9 +1,7 @@
 <template>
   <el-container id="container" style="height: calc(100vh - 70px);margin-top:70px">
     <el-aside width="50vw" style="background-color: #eeeeee">
-      <div id="g6Data">
-
-      </div>
+      <div id="g6Data"></div>
     </el-aside>
     <el-main style="padding: 0">
       <el-tabs v-model="activeName" stretch>
@@ -11,7 +9,7 @@
           <div id="btn-area">
             <el-upload
                 class="question-upload"
-                action="#"
+                action="http://192.168.187.128/v2/projects"
                 :multiple="false"
                 limit="1"
                 :auto-upload="false">
@@ -121,7 +119,7 @@ RouterA:
   show: sh ip route
   showtest: 3.3.3.0 [1/0] via 192.168.12.2`,
       rows: 30,
-      routerTitle: 'RouterA',
+      routerTitle: 'Router',
       routerData: [
         {
           port: 's0/0/0',
