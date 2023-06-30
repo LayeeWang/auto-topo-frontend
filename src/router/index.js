@@ -4,6 +4,7 @@ import layout from "../layout";
 import HelloWorld from "@/components/HelloWorld";
 import task from "@/components/task";
 import myTask from "@/components/myTask";
+import manageUser from "@/components/manageUser";
 
 
 Vue.use(Router)
@@ -39,6 +40,11 @@ export default new Router({
                     path: '/myTask',
                     component: myTask,
                     name: '我的任务',
+                },
+                {
+                    path: '/manageUser',
+                    component: manageUser,
+                    name: '用户管理',
                 }
             ]
         },

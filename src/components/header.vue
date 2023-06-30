@@ -24,6 +24,10 @@
           <!--          <a-icon type="search" />-->
           <span>我的任务</span>
         </el-menu-item>
+        <el-menu-item class="menu-top-item" index="/manageUser" v-if="userType === 'admin'">
+          <!--          <a-icon type="search" />-->
+          <span>用户管理</span>
+        </el-menu-item>
         <el-menu-item class="menu-top-item" index="/login">
           <!--          <a-icon type="car"/>-->
           <span>退出登录</span>
